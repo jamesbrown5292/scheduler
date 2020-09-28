@@ -1,10 +1,31 @@
 import React from "react";
 
 import "components/Button.scss";
+import { action } from "@storybook/addon-actions";
 
 export default function Button(props) {
+   let buttonClass = "button";
+
+   if (props.confirm) {
+      buttonClass += " button--confirm"
+   }
+
+   if (props.danger) {
+      buttonClass += " button--danger"
+   }
+
+
+
    return (
-     <button className="Button">{props.children}</button> 
+      <button 
+         className={buttonClass} 
+         onClick={action("button-clicked")}
+         disabled = {props.disabled}
+      >
+                        
+         {props.children}
+         
+      </button>
    );
 }
 
