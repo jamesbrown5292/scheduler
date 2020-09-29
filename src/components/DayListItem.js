@@ -9,11 +9,21 @@ export default function DayListItem(props) {
     'day-list__item--selected': props.selected,
     'day-list__item--full': props.spots === 0
   })
+  let spots = props.spots
+  let spotsWords = "";
+  if (spots === 0) {
+    spotsWords = "no spots remaining"
+  } else if (spots === 1) {
+    spotsWords = spots + " spot remaining"
+  } else {
+    spotsWords = spots + " spots remaining"
+  }
+
 
   return (
     <li className={listItemClass} onClick={() => props.setDay(props.name)}>
-      <h2 className="text--regular">Day Name</h2> 
-      <h3 className="text--light">{props.spots} spots remaining</h3>
+      <h2 className="text--regular">{props.name}</h2> 
+      <h3 className="text--light"> {spotsWords} </h3>
     </li>
   );
 }
