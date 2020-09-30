@@ -11,8 +11,8 @@ function InterviewerList(props) {
         <InterviewerListItem 
           avatar= {person.avatar}
           name={person.name}
-          setInterviewer={props.setInterviewer(person.id)}
-          selected = {props.interviewer === person.id}
+          setInterviewer={props.onChange(person.id)}
+          selected = {props.value === person.id}
 
         />
       </li>
