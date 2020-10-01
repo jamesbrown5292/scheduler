@@ -7,7 +7,7 @@ const Empty = (props) => {
         className="appointment__add-button"
         src="images/add.png"
         alt="Add"
-        onclick={props.onAdd}
+        onClick={props.onAdd}
       />
     </main>
   );
