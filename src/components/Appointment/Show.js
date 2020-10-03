@@ -19,13 +19,13 @@ const Show = (props) => {
             className="appointment__actions-button"
             src="images/edit.png"
             alt="Edit"
-            onClick={() => props.onEdit(props.student, props.interviewerId)}
+            onClick={props.onEdit}
           />
           <img
             className="appointment__actions-button"
             src="images/trash.png"
             alt="Delete"
-            onClick={props.cancelInterview}
+            onClick={props.onConfirm}
           />
         </section>
       </section>

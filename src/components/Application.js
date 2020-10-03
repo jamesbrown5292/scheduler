@@ -46,7 +46,7 @@ export default function Application(props) {
         ...state, appointments
       });
       console.log("put req ", interview)
-    }).catch(e => console.error(e)) 
+    })
 
   }
   console.log("state", state)
@@ -55,12 +55,21 @@ export default function Application(props) {
 
   function cancelInterview(id) {
 
-    return axios.delete(`/api/appointments/${id}`).then( () => {
-      setState({
-        ...state,
-      })
-    })
-  }
+    // return axios.delete(`/api/appointments/${id}`).then( () => {
+    //   setState({
+    //     ...state,
+    //   })
+    // })
+    return (
+      axios.delete(`/api/appointments/${id}`)
+        .then((response) => {
+          setState({...state})
+        })
+        .catch((error) => {
+          return Promise.reject(error);
+        })
+    )
+}
   
   
   function edit(id, interview) {
@@ -82,7 +91,7 @@ export default function Application(props) {
         ...state, appointments
       });
       console.log("put req ", interview)
-    }).catch(e => console.error(e)) 
+    })
 
   }
     
