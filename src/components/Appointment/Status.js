@@ -1,6 +1,7 @@
 import React from 'react';
 
 function Status(props) {
+  console.log("status props", props)
   return (
     <main className="appointment__card appointment__card--status">
       <img
@@ -8,7 +9,7 @@ function Status(props) {
         src="images/status.png"
         alt="Loading"
       />
-      <h1 className="text--semi-bold">Deleting</h1>
+      <h1 className="text--semi-bold">Saving</h1>
   </main>
   );
 }
