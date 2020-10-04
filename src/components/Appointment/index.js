@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+// import React, { useEffect } from 'react'
+import React from 'react'
 import "components/Appointment/styles.scss";
 import Header from "components/Appointment/Header"
 import Form from "components/Appointment/Form"
@@ -28,21 +29,24 @@ export default function Appointment(props) {
       student: name,
       interviewer
     }; 
-    props.bookInterview(props.id, interview).then(() => {transition("SHOW")}).catch((e) => {
-      transition(ERROR_SAVE)
-    });
     transition(SAVING);
+
+    props.bookInterview(props.id, interview).then(() => {
+      transition(SHOW);
+
+    }).catch((e) => {
+      transition(ERROR_SAVE, true)
+    });
     
   }
 
   const deleteInterview = () => {
     // transition(CONFIRM);
     
-    console.log("delete interview running");
     props.cancelInterview(props.id).then(() => {
+      transition(EMPTY);
     }).catch((e) => {
-      console.log("del int eerror rec'd", e)
-      transition(ERROR_DELETE);
+      transition(ERROR_DELETE, true);
     });
   }
 
@@ -61,18 +65,17 @@ export default function Appointment(props) {
 
   
 
-  console.log("propsinterview", props.interview)
 
   // const interviewBooked = props.interview ?  <Show student={props.interview.student} interviewer={props.interview.interviewer} /> : <Empty onAdd={props.onAdd}/>
   return (
     <div>
       <Header time={props.time}/>
       <article className="appointment"></article>
-      {mode === SAVING && <Status/> }
+      {mode === SAVING && <Status message="Saving"/>  }
       {mode === CONFIRM && <Confirm onConfirm={() => deleteInterview()} onCancel={() => {back()}}/> }
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-      {mode === ERROR_SAVE && <Error onClose={() => transition(CREATE)}/>}
-      {mode === ERROR_DELETE && <Error onClose={() => transition(SHOW)}/>}
+      {mode === ERROR_SAVE && <Error onClose={back}/>}
+      {mode === ERROR_DELETE && <Error onClose={back}/>}
       {mode === SHOW && (
 
         <Show
@@ -81,6 +84,7 @@ export default function Appointment(props) {
           student={props.interview.student}
           interviewer={props.interview.interviewer}
           onEdit={onEdit}
+          onDelete
         />
     )}
     {mode === CREATE && <Form 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState} from 'react'
 import InterviewerList from "components/InterviewerList"
 import Button from "components/Button"
 
@@ -6,7 +6,6 @@ const Form = ({studentName, interviewerId, interviewers, save, onCancel}) => {
 
   const [name, setName] = useState(studentName || "");
   const [interviewer, setInterviewer] = useState(interviewerId || null);
-  console.log("intervieweer Id form", interviewerId);
   const reset = () => {
     setName("");
     setInterviewer(null);
