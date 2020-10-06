@@ -70,13 +70,13 @@ export default function Appointment(props) {
 
   // const interviewBooked = props.interview ?  <Show student={props.interview.student} interviewer={props.interview.interviewer} /> : <Empty onAdd={props.onAdd}/>
   return (
-    <div>
+    <div data-testid="appointment">
       <Header time={props.time}/>
-      <article className="appointment"></article>
+      <article className="appointment" ></article>
       {mode === SAVING && <Status message="Saving"/>  }
       {mode === DELETING && <Status message="DELETING"/>  }
       {mode === CONFIRM && <Confirm onConfirm={() => deleteInterview()} onCancel={() => {back()}}/> }
-      {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+      {mode === EMPTY && <Empty alt="Add" onAdd={() => transition(CREATE)} />}
       {mode === ERROR_SAVE && <Error onClose={back}/>}
       {mode === ERROR_DELETE && <Error onClose={back}/>}
       {mode === SHOW && (

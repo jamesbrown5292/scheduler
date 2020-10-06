@@ -28,8 +28,7 @@ export default function useApplicationData(initial) {
 
 
   const bookInterview = (id, interview) => {
-    console.log("save sequence, decrease spots count, state is", state)
-    console.log("id is", id)
+
 
     const appointment = {
       ...state.appointments[id],

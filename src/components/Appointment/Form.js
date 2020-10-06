@@ -4,7 +4,6 @@ import Button from "components/Button"
 
 const Form = (props) => {
   const {name, interviewerId, interviewers, save, onCancel} = props;
-  console.log("propsin form", props)
   const [studentName, setName] = useState(name || "");
   const [interviewer, setInterviewer] = useState(interviewerId || null);
   const [error, setError] = useState("");
