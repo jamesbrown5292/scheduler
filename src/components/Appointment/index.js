@@ -99,7 +99,7 @@ export default function Appointment(props) {
     />}
 
     {mode === EDIT && <Form 
-      studentName={props.interview.student}
+      name={props.interview.student}
       interviewerId = {props.interview.interviewer.id} 
       interviewers = {Object.values(props.interviewers)}
       save = {save}
