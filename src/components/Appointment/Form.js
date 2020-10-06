@@ -22,14 +22,13 @@ const Form = (props) => {
 
 
   function validate() {
-    // console.log("validating");
-    // console.log("name")
+
     if (studentName === "") {
       setError("Student name cannot be blank");
       return;
     }
-  
-    save(name, interviewer);
+    setError("");
+    save(studentName, interviewer);
   }
 
   return (
