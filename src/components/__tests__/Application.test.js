@@ -1,10 +1,11 @@
 import React from "react";
-import { render, cleanup, waitForElement, fireEvent, prettyDOM, getByText, queryByAltText, queryByText, getAllByTestId, getByPlaceholderText, getByAltText, getByTestId} from "@testing-library/react";
+import { render, cleanup, act, waitForElement, fireEvent, prettyDOM, getByText, queryByAltText, queryByText, getAllByTestId, getByPlaceholderText, getByAltText, getByTestId, getByRole} from "@testing-library/react";
 
 import Application from "components/Application";
 
 
 describe("Application", () => {
+  
   afterEach(() => {cleanup()});
 
 
@@ -80,24 +81,38 @@ describe("Application", () => {
   });
 
 
-  it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
+  it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
 
     const { container, debug } = render(<Application />);
   
     await waitForElement(() => getByText(container, "Archie Cohen"));
   
-    // 3. Click the "Delete" button on the booked appointment.
     const appointment = getAllByTestId(container, "appointment").find(
       appointment => queryByText(appointment, "Archie Cohen")
     );
     
     fireEvent.click(queryByAltText(appointment, "Edit"));
-  
-    // 4. Check that the confirmation message is shown.
-    act(fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
-      target: { value: "Lydia Miller-Jones" }
-    });)
-  
-  }
+    await waitForElement(() => getByPlaceholderText(container, "Enter Student Name"));
+    debug();
+
+    expect(getByPlaceholderText(container, "Enter Student Name")).toBeInTheDocument();
+    debug();
+
+    fireEvent.change(getByTestId(container, "student-name-input"), {
+      target: { value: "James" }
+    });
+
+    fireEvent.click(queryByText(appointment, "Save"));
+
+    expect(getByText(appointment, "Saving")).toBeInTheDocument();
+
+    await waitForElement(() => getByText(appointment, "Saving"));
+
+    await waitForElement(() => getByText(container, "James"));
+    expect(getByText(container, "James")).toBeInTheDocument();
+
+
+  })
+    
  
 });
