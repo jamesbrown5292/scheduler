@@ -40,16 +40,21 @@ export default function useApplicationData(initial) {
       [id]: appointment
     };
 
-    const stateCopy = {...state}
-    for (let day of stateCopy.days) {
+    const newDays = state.days.map( (day) => {
       if (day.appointments.includes(id)) {
-        day.spots --;
-      }
-    }
+         return { ...day, spots: day.spots - 1};
+       } 
+      return day;
+    })
+
+    
+    
+    
+
 
     return axios.put(`/api/appointments/${id}`, {interview}).then( () => {
       setState({
-        ...stateCopy, appointments
+        ...state, appointments, days: newDays
       });
     })
   };
@@ -57,18 +62,42 @@ export default function useApplicationData(initial) {
   
 
   const cancelInterview = (id) => {
-
-    const stateCopy = {...state}
-    for (let day of stateCopy.days) {
+    
+    const newDays = state.days.map( (day) => {
+      console.log("dayspots", day.spots)
       if (day.appointments.includes(id)) {
-        day.spots ++;
-      }
-    }
+         const newDay = { 
+           ...day,
+           spots: day.spots + 1
+         }
+         console.log("dayspots2", newDay.spots)
+
+         return { ...day, spots: day.spots + 1};
+       } 
+      return day;
+    })
+
+    // const testDays = [
+    //   {
+    //     id: 1,
+    //     name: "Monday",
+    //     appointments: [1, 2],
+    //     interviewers: [1, 2],
+    //     spots: 2
+    //   },
+    //   {
+    //     id: 2,
+    //     name: "Tuesday",
+    //     appointments: [3, 4],
+    //     interviewers: [3, 4],
+    //     spots: 1
+    //   }
+    //
 
     return (
       axios.delete(`/api/appointments/${id}`)
         .then((response) => {
-          setState({...stateCopy})
+          setState({...state, days: newDays})
         })
         .catch((error) => {
           return Promise.reject(error);

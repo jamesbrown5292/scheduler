@@ -106,5 +106,18 @@ export default {
         statusText: "OK"
       });
     }
+  }),
+
+  delete: jest.fn(url => {
+
+
+    if (url.includes("/api/appointments/")) {
+      /* Resolve appointments data */
+      return Promise.resolve({
+        status: 204,
+        statusText: "OK"
+      });
+    }
+
   })
 }

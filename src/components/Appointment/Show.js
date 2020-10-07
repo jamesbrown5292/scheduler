@@ -22,6 +22,7 @@ const Show = (props) => {
             onClick={props.onEdit}
           />
           <img
+            data-testid="delete"
             className="appointment__actions-button"
             src="images/trash.png"
             alt="Delete"
