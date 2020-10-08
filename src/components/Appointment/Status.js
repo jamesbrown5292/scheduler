@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Status({message}) {
+function Status ({ message }) {
   return (
     <main className="appointment__card appointment__card--status">
       <img
@@ -9,7 +9,7 @@ function Status({message}) {
         alt="Loading"
       />
       <h1 className="text--semi-bold">{message}</h1>
-  </main>
+    </main>
   );
 }
 

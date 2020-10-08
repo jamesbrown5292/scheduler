@@ -1,26 +1,24 @@
-import React from "react";
-import "components/Application.scss";
-import DayList from "./DayList"
-import Appointment from "./Appointment"
-import {getAppointmentsForDay,  getInterview, getInterviewersForDay } from "../helpers/selectors.js"
-import useApplicationData from "../hooks/useApplicationData.js"
+import React from 'react';
+import 'components/Application.scss';
+import DayList from './DayList';
+import Appointment from './Appointment';
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from '../helpers/selectors.js';
+import useApplicationData from '../hooks/useApplicationData.js';
 
-export default function Application(props) {
-  const {state, setDay, bookInterview, cancelInterview, edit} = useApplicationData();
+export default function Application (props) {
+  const { state, setDay, bookInterview, cancelInterview, edit } = useApplicationData();
 
-  
-  let dailyAppointments = []
-  let interviewers = []
+  let dailyAppointments = [];
+  let interviewers = [];
 
   dailyAppointments = getAppointmentsForDay(state, state.day);
-  interviewers = getInterviewersForDay(state, state.day)
-
+  interviewers = getInterviewersForDay(state, state.day);
 
   return (
     <main className="layout">
       <section className="sidebar">
 
-          <img
+        <img
           className="sidebar--centered"
           src="images/logo.png"
           alt="Interview Scheduler"
@@ -42,20 +40,19 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {dailyAppointments.map(appointment => {
-
           const interview = getInterview(state, appointment.interview);
 
           return (
-            <Appointment 
+            <Appointment
               edit={edit}
-              key={appointment.id} 
-              {...appointment} 
-              interview={interview} 
-              interviewers={interviewers} 
-              bookInterview={bookInterview} 
+              key={appointment.id}
+              {...appointment}
+              interview={interview}
+              interviewers={interviewers}
+              bookInterview={bookInterview}
               cancelInterview={cancelInterview}
-              />
-          )
+            />
+          );
         })}
         <Appointment key="last" time="5pm" />
       </section>
