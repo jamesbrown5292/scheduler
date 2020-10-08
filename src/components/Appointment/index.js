@@ -56,14 +56,9 @@ export default function Appointment (props) {
 
   function onEdit (name, interviewer) {
     transition(EDIT);
-    // const interview = {
-    //   student: name,
-    //   interviewer
-    // };
-    // props.edit(props.id, interview).then(() => {transition("SHOW")});
+   
   }
 
-  // const interviewBooked = props.interview ?  <Show student={props.interview.student} interviewer={props.interview.interviewer} /> : <Empty onAdd={props.onAdd}/>
   return (
     <div data-testid="appointment">
       <Header time={props.time}/>
@@ -77,7 +72,6 @@ export default function Appointment (props) {
       {mode === SHOW && (
 
         <Show
-          // inteviewerId = {props.interview.interviewer.id}
           onConfirm={confirmClick}
           student={props.interview.student}
           interviewer={props.interview.interviewer}
