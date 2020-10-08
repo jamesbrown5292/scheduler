@@ -4,6 +4,7 @@ import axios from 'axios';
 export default function useApplicationData (initial) {
   
   const SET_DAY = "SET_DAY";
+  const SET_DAYS = "SET_DAYS";
   const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
   const SET_INTERVIEW = "SET_INTERVIEW";
 
@@ -13,9 +14,11 @@ export default function useApplicationData (initial) {
     switch(action.type) {
       case SET_DAY:
         const { day } = action;
-        return {
-          ...state, day
-        };
+        return {...state, day};
+
+      case SET_DAYS: 
+        return { ...state, days: action.days };
+
       case SET_APPLICATION_DATA:
         const { days, interviewers } = action;
         return {
@@ -77,19 +80,26 @@ export default function useApplicationData (initial) {
 
   const bookInterview = (id, interview) => {
 
-    return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
-      dispatch({
-        type: SET_INTERVIEW, id, interview
+    return axios.put(`/api/appointments/${id}`, { interview })
+      .then(() => {
+        return axios.get("/api/days");
+      })
+      .then((response) => {
+        dispatch({type: SET_INTERVIEW, id, interview});
+        dispatch({ type: SET_DAYS, days: response.data });
       });
-    });
   };
 
   const cancelInterview = (id) => {
 
     return (
       axios.delete(`/api/appointments/${id}`)
+        .then(() => {
+          return axios.get("/api/days");
+        })
         .then((response) => {
           dispatch({type: SET_INTERVIEW, id, interview: null });
+          dispatch({ type: SET_DAYS, days: response.data });
         })
         .catch((error) => {
           return Promise.reject(error);
