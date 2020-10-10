@@ -107,7 +107,7 @@ export default function useApplicationData (initial) {
     );
   };
 
-  function edit (id, interview) {
+  const edit = (id, interview) => {
 
     return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
       dispatch({
