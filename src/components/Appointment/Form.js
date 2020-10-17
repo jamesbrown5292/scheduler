@@ -2,22 +2,26 @@ import React, { useState } from 'react';
 import InterviewerList from 'components/InterviewerList';
 import Button from 'components/Button';
 
+//Form view for when user creates an appt.
 const Form = (props) => {
   const { name, interviewerId, interviewers, save, onCancel } = props;
   const [studentName, setName] = useState(name || '');
   const [interviewer, setInterviewer] = useState(interviewerId || null);
   const [error, setError] = useState('');
 
+  //Reset the form fields
   const reset = () => {
     setName('');
     setInterviewer(null);
   };
 
+  //Cancel interview creation
   const cancel = () => {
     reset();
     onCancel();
   };
 
+  //Valiate form input
   function validate () {
     if (studentName === '') {
       setError('Student name cannot be blank');
@@ -52,7 +56,6 @@ const Form = (props) => {
         <section className="appointment__actions">
           <Button danger onClick={cancel}>Cancel</Button>
           <Button confirm onClick={() => {
-          // save(studentName, interviewer)
             validate();
           }}>Save</Button>
         </section>

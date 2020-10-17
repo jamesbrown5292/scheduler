@@ -1,6 +1,7 @@
 import {  useEffect, useReducer } from 'react';
 import axios from 'axios';
 
+//Custom hook for handling API routes for setting, updating, and deleting appointments and updating state to reflect these changes. 
 export default function useApplicationData (initial) {
   
   const SET_DAY = "SET_DAY";
@@ -8,7 +9,7 @@ export default function useApplicationData (initial) {
   const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
   const SET_INTERVIEW = "SET_INTERVIEW";
 
-
+  //reducer to handle updates to state from different actions
   const reducer = (state, action) => {
     
     switch(action.type) {
@@ -53,7 +54,7 @@ export default function useApplicationData (initial) {
     };
   };
 
-
+  //use reducer to handle application state for CRUD routes
   const [state, dispatch] = useReducer(reducer, {
     day: "Monday",
     days: [],
@@ -77,6 +78,7 @@ export default function useApplicationData (initial) {
       }));
     });
   }, []);
+
 
   const bookInterview = (id, interview) => {
 

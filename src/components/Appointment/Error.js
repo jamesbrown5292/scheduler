@@ -1,5 +1,6 @@
 import React from 'react';
 
+//Error view for when an error occurs with API request.
 const Error = (props) => {
   return (
     <main className="appointment__card appointment__card--error">

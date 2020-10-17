@@ -3,6 +3,8 @@ import InterviewerListItem from './InterviewerListItem';
 import 'components/InterviewerList.scss';
 import PropTypes from 'prop-types'; // ES6
 
+
+//List of interviewers featuring each interviewer, their name and avatar
 function InterviewerList (props) {
   const interviewers = props.interviewers.map((person) => {
     return (

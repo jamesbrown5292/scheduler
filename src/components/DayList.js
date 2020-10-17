@@ -1,6 +1,8 @@
 import React from 'react';
 import DayListItem from './DayListItem';
 
+
+//List of days including name, slots booked etc.
 export default function DayList (props) {
   const days = props.days.map(day => {
     return (

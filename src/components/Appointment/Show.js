@@ -1,5 +1,6 @@
 import React from 'react';
 
+//Show view for when an appt exists in a given time slot showing student and interviewer name and delete, edit buttons
 const Show = (props) => {
   return (
     <main className="appointment__card appointment__card--show">

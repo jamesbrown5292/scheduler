@@ -1,24 +1,23 @@
+
+//Given a day and the application sate, return all of the appointments for that day
 export function getAppointmentsForDay (state, day) {
+  const apptArray = [];
   if (state.days.length) {
     const filteredDays = state.days.filter(dayName => dayName.name === day);
 
     if (filteredDays.length) {
       const appointmentIds = filteredDays[0].appointments;
-      const apptArray = [];
-
-      for (const id of appointmentIds) {
-        for (const appointment in state.appointments) {
-          if (state.appointments[appointment].id === id) {
-            apptArray.push(state.appointments[appointment]);
-          }
+      for (const appointment in state.appointments) {
+        if (appointmentIds.includes(state.appointments[appointment].id)) {
+          apptArray.push(state.appointments[appointment]);
         }
       }
-
-      return apptArray;
-    } else return [];
-  } else return [];
+    } 
+  } 
+  return apptArray;
 }
 
+//Get the details for an interview including the student and interviewer name
 export function getInterview (state, interview) {
   const interviewObj = {};
 
@@ -30,22 +29,22 @@ export function getInterview (state, interview) {
   return interviewObj;
 }
 
+//Get the details for all interviewers working on a particular day including the avatar and name
 export function getInterviewersForDay (state, day) {
+  
+  const interviewersArray = [];
   if (state.days.length) {
     const filteredDays = state.days.filter(dayName => dayName.name === day);
 
     if (filteredDays.length) {
       const interviewerIds = filteredDays[0].interviewers;
-      const interviewersArray = [];
-
-      for (const id of interviewerIds) {
-        for (const interviewer in state.interviewers) {
-          if (state.interviewers[interviewer].id === id) {
-            interviewersArray.push(state.interviewers[interviewer]);
-          }
+      
+      for (const interviewer in state.interviewers) {
+        if (interviewerIds.includes(state.interviewers[interviewer].id)) {
+          interviewersArray.push(state.interviewers[interviewer]);
         }
       }
-      return interviewersArray;
-    } else return [];
-  } else return [];
+    } 
+  } 
+  return interviewersArray;
 }

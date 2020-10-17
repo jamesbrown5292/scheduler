@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+
+//Handle switching through modes while performing CRUD actions. Uses stack to handle user pressing 'back'
 export default function useVisualMode (initial) {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);

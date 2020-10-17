@@ -1,5 +1,6 @@
 import React from 'react';
 
+//Status view can show DELETING or SAVING message 
 function Status ({ message }) {
   return (
     <main className="appointment__card appointment__card--status">

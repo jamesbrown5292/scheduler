@@ -25,6 +25,8 @@ export default function Appointment (props) {
     props.interview ? SHOW : EMPTY
   );
 
+  //Save an interview and transition to the SAVING view, book rhe inrerview and transition to the appt view...
+  //...or error view if errors in saving. 
   function save (name, interviewer) {
     const interview = {
       student: name,
@@ -39,8 +41,8 @@ export default function Appointment (props) {
     });
   }
 
+  //Delet an interview and transition to the empty appointment field. Show the DELETING view after the request is sent. 
   const deleteInterview = () => {
-    // transition(CONFIRM);
 
     props.cancelInterview(props.id).then(() => {
       transition(EMPTY);
@@ -50,13 +52,14 @@ export default function Appointment (props) {
     transition(DELETING);
   };
 
+  //Confirm deletion with user
   const confirmClick = () => {
     transition(CONFIRM);
   };
 
+  //Handle user clicking edit button
   function onEdit (name, interviewer) {
     transition(EDIT);
-   
   }
 
   return (

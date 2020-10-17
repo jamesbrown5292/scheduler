@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+//Empty view for when no appt. exists in a given time slot
 const Empty = (props) => {
   return (
     <main className="appointment__add" alt="Add">

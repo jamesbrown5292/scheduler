@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from 'components/Button';
 
+//Confirm view for when user clicks delete on an appt.
 const Confirm = (props) => {
   return (
     <main className="appointment__card appointment__card--confirm">
